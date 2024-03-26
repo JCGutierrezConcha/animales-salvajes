@@ -58,9 +58,7 @@ const crearAnimal = async (animal) => {
     }
 
     animalesSeleccionados.push(nuevoAnimal);
-    console.log(animalesSeleccionados)
     const index = animalesSeleccionados.length - 1;
-    console.log(index)
     const cardAnimal = crearAnimalCard(nuevoAnimal, index);
     const contenedor = document.createElement("div");
     contenedor.innerHTML = cardAnimal;
@@ -89,11 +87,11 @@ const crearAnimalCard = (animal, index) => {
 };
 
 const playSound = (animalId) => {
-    console.log(animalId)
-
     let audioAnimal = document.getElementById('animalAudio' + animalId)
     audioAnimal.play()
 }
+
+window.playSound = playSound;
 
 const crearModal = (animalId) => {
     const animal = animalesSeleccionados[animalId]
@@ -121,7 +119,6 @@ const crearModal = (animalId) => {
     </div>
     </div>`
 }
-
 
 btnRegistrar.addEventListener('click', (evento) => {
     evento.preventDefault();
