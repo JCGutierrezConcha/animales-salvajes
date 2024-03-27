@@ -10,6 +10,7 @@ const animalesData = (() => {
     return { getData };
 })();
 
+// Función para capturar imagen y sonido de un determinado animal.
 export const multimedia = async (animal) => {
     const datos = await animalesData.getData();
     const registro = datos.find((item) => item.name == animal)

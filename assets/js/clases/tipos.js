@@ -1,4 +1,4 @@
-
+// Definición de las clasesde los distintos tipos de animales, que gheredan de la clase Animal.
 import Animal from "./animal.js";
 
 const audioPlayer = document.getElementById("player");

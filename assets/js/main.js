@@ -8,6 +8,7 @@ const animalDom = document.getElementById("animal");
 const edadDom = document.getElementById("edad");
 const comentaDom = document.getElementById("comentarios");
 const previewDom = document.getElementById("preview");
+const modalDom = document.getElementById("exampleModal");
 const tablaAnimales = document.getElementById("Animales");
 
 const validarFormulario = () => {
@@ -31,6 +32,7 @@ animalDom.addEventListener("change", async (event) => {
     previewDom.style.backgroundImage = `url(${imagenSrc})`
 });
 
+// Funcion que crea Instancia de animales, Card para mostrar en la tabla y Modal.
 const crearAnimal = async (animal) => {
     const nombre = animalDom.value;
     const edad = edadDom.value;
@@ -63,9 +65,14 @@ const crearAnimal = async (animal) => {
     const contenedor = document.createElement("div");
     contenedor.innerHTML = cardAnimal;
     tablaAnimales.appendChild(contenedor);
-
+    const modalAnimal = crearModal(nuevoAnimal, index);
+    console.log(modalAnimal)
+    const contenedorModal = document.createElement("div");
+    contenedorModal.innerHTML = modalAnimal;
+    modalDom.appendChild(contenedorModal);
 }
 
+// Función paralimpiar el formulario.
 const limpiarForm = (nombre, edad, comentarios) => {
     nombre.selectedIndex = 0;
     edad.selectedIndex = 0;
@@ -73,10 +80,11 @@ const limpiarForm = (nombre, edad, comentarios) => {
     previewDom.style.backgroundImage = 'url("./assets/imgs/lion.svg")'
 }
 
+// Función de crea Card con imagen e icono de sonido
 const crearAnimalCard = (animal, index) => {
     return `<div id="${animal.nombre}${index}"class="card text-white bg-secondary m-3">
                 <p class="animal-name">${animal.nombre}</p>
-                <img style="width: 10rem;" src="${animal.img}" class ="card-top" data-bs-toggle="modal" data-bs-target="#${animal.nombre}-${index}"/>
+                <img type= button style="width: 10rem;" src="${animal.img}" class ="card-top" data-bs-toggle="modal" data-bs-target="#${animal.nombre}-${index}"/>
                 <div class="card-body p-1">                    
                  <img onclick="playSound('${index}')" class="p-1" height="30rem" src="./assets/imgs/audio.svg"/>
                  <audio id="animalAudio${index}">
@@ -86,17 +94,18 @@ const crearAnimalCard = (animal, index) => {
             </div>`
 };
 
+// Función para activar sonido de una nimal determinado,
 const playSound = (animalId) => {
     let audioAnimal = document.getElementById('animalAudio' + animalId)
     audioAnimal.play()
 }
-
+// Activación del sonido.
 window.playSound = playSound;
 
-const crearModal = (animalId) => {
-    const animal = animalesSeleccionados[animalId]
 
-    return `<div class="modal fade" id="${animal.nombre}-${animalId}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+// Funciónpara crear Modal con información de nombre, edad y comentarios de undeerminado animal.
+const crearModal = (animal, index) => {
+    return `<div class="modal fade" id="${animal.nombre}-${index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered w-25 role=document">
         <div class="modal-content bg-dark text-white">
         <div class="modal-header">
@@ -120,6 +129,7 @@ const crearModal = (animalId) => {
     </div>`
 }
 
+// Evento que activa funciones al hacer click en boton para el registro de un animal.
 btnRegistrar.addEventListener('click', (evento) => {
     evento.preventDefault();
     if (validarFormulario()) {

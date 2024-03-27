@@ -1,4 +1,4 @@
-// Definición de la clase Animal para representar objetos de animales.
+// Definición de la clase Animal para representar objetos de animales, con getters y setters.
 
 export default class Animal {
     #nombre
