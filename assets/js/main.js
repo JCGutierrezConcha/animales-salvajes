@@ -11,6 +11,7 @@ const previewDom = document.getElementById("preview");
 const modalDom = document.getElementById("exampleModal");
 const tablaAnimales = document.getElementById("Animales");
 
+// Función para validar ingreso/seleccion de datos al formulario.
 const validarFormulario = () => {
     const nombre = animalDom.value;
     const edad = edadDom.value;
@@ -24,7 +25,7 @@ const validarFormulario = () => {
 }
 
 
-// Evento de cambio en la selección del tipo de animal
+// Evento de cambio de la imagen del preview (al final del formulario)
 animalDom.addEventListener("change", async (event) => {
     const animalSelected = event.target.value;
     const imagenSrc = (await multimedia(animalSelected)).imagen;
@@ -66,13 +67,12 @@ const crearAnimal = async (animal) => {
     contenedor.innerHTML = cardAnimal;
     tablaAnimales.appendChild(contenedor);
     const modalAnimal = crearModal(nuevoAnimal, index);
-    console.log(modalAnimal)
     const contenedorModal = document.createElement("div");
     contenedorModal.innerHTML = modalAnimal;
     modalDom.appendChild(contenedorModal);
 }
 
-// Función paralimpiar el formulario.
+// Función para limpiar el formulario.
 const limpiarForm = (nombre, edad, comentarios) => {
     nombre.selectedIndex = 0;
     edad.selectedIndex = 0;
