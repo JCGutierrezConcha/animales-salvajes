@@ -30,7 +30,7 @@ animalDom.addEventListener("change", async (event) => {
     const animalSelected = event.target.value;
     const imagenSrc = (await multimedia(animalSelected)).imagen;
     previewDom.parentElement.classList.remove("p-5");
-    previewDom.style.backgroundImage = `url(${imagenSrc})`
+    previewDom.style.backgroundImage = `url(${imagenSrc})`;
 });
 
 // Funcion que crea Instancia de animales, Card para mostrar en la tabla y Modal.
@@ -44,31 +44,29 @@ const crearAnimal = async (animal) => {
 
     switch (animal) {
         case 'Leon':
-            nuevoAnimal = new Leon(nombre, edad, imagen, comentarios, sonido)
+            nuevoAnimal = new Leon(nombre, edad, imagen, comentarios, sonido);
             break
         case 'Lobo':
-            nuevoAnimal = new Lobo(nombre, edad, imagen, comentarios, sonido)
+            nuevoAnimal = new Lobo(nombre, edad, imagen, comentarios, sonido);
             break
         case 'Oso':
-            nuevoAnimal = new Oso(nombre, edad, imagen, comentarios, sonido)
+            nuevoAnimal = new Oso(nombre, edad, imagen, comentarios, sonido);
             break
         case 'Serpiente':
-            nuevoAnimal = new Serpiente(nombre, edad, imagen, comentarios, sonido)
+            nuevoAnimal = new Serpiente(nombre, edad, imagen, comentarios, sonido);
             break
         case 'Aguila':
-            nuevoAnimal = new Aguila(nombre, edad, imagen, comentarios, sonido)
+            nuevoAnimal = new Aguila(nombre, edad, imagen, comentarios, sonido);
             break
     }
 
     animalesSeleccionados.push(nuevoAnimal);
     const index = animalesSeleccionados.length - 1;
     const cardAnimal = crearAnimalCard(nuevoAnimal, index);
-    console.log(cardAnimal)
     const contenedor = document.createElement("div");
     contenedor.innerHTML = cardAnimal;
     tablaAnimales.appendChild(contenedor);
     const modalAnimal = crearModal(nuevoAnimal, index);
-    console.log(modalAnimal)
     const contenedorModal = document.createElement("div");
     contenedorModal.innerHTML = modalAnimal;
     modalDom.appendChild(contenedorModal);
@@ -91,8 +89,8 @@ const crearAnimalCard = (animal, index) => {
 
 // Función para activar sonido de un determinado animal.
 const playSound = (animalId) => {
-    let audioAnimal = document.getElementById('animalAudio' + animalId)
-    audioAnimal.play()
+    let audioAnimal = document.getElementById('animalAudio' + animalId);
+    audioAnimal.play();
 
 }
 
@@ -100,14 +98,11 @@ const playSound = (animalId) => {
 const limpiarForm = (nombre, edad, comentarios) => {
     nombre.selectedIndex = 0;
     edad.selectedIndex = 0;
-    comentarios.value = ""
-    previewDom.style.backgroundImage = 'url("./assets/imgs/lion.svg")'
-
+    comentarios.value = "";
+    previewDom.style.backgroundImage = 'url("./assets/imgs/lion.svg")';
 }
 // Activación del sonido.
 window.playSound = playSound;
-
-
 
 // Función para crear Modal con información de nombre, edad y comentarios de un determinado animal.
 const crearModal = (animal, index) => {
@@ -142,7 +137,6 @@ btnRegistrar.addEventListener('click', (evento) => {
     if (validarFormulario()) {
         crearAnimal(animalDom.value);
         limpiarForm(animalDom, edadDom, comentaDom);
-
     }
 });
 
